@@ -49,7 +49,7 @@ func getConfig() Config {
 	if (err != nil) { panic(err); }
 
 	if (!configDirExists) {
-		os.Mkdir("/etc/openrepo", 755);
+		os.Mkdir("/etc/openrepo", 777);
 	}
 
 	configExists, err := exists("/etc/openrepo/config.xml");

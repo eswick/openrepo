@@ -117,7 +117,7 @@ func main() {
   if (err != nil) { panic(err); }
 
   if (!packagePathExists) {
-    err := os.MkdirAll(config.PackagePath, 755);
+    err := os.MkdirAll(config.PackagePath, 777);
     if (err != nil) { panic(err); }
   }
 
