@@ -113,11 +113,19 @@ func handlePackageRequest(w http.ResponseWriter, req *http.Request) {
 func main() {
   config = getConfig();
 
+  packagePathExists, err := exists(config.PackagePath);
+  if (err != nil) { panic(err); }
+
+  if (!packagePathExists) {
+    err := os.MkdirAll(config.PackagePath, 755);
+    if (err != nil) { panic(err); }
+  }
+
   mux := NewRepoMux();
   mux.HandleFunc(config.HostPath, handleRequest);
   mux.HandleFunc(config.HostPath + "package/", handlePackageRequest);
 
-  err := http.ListenAndServe(":80", mux);
+  err = http.ListenAndServe(":80", mux);
 
   if (err != nil) { panic(err); }
 
