@@ -1,0 +1,14 @@
+<Config>
+	<HostPath>/</HostPath>
+	<PackagePath>/opt/openrepo/packages</PackagePath>
+	<Release>
+		<ReleaseEntry key="Origin">OpenRepo</ReleaseEntry>
+		<ReleaseEntry key="Label">OpenRepo</ReleaseEntry>
+		<ReleaseEntry key="Suite">stable</ReleaseEntry>
+		<ReleaseEntry key="Version">1.0</ReleaseEntry>
+		<ReleaseEntry key="Codename">OpenRepo</ReleaseEntry>
+		<ReleaseEntry key="Architectures">iphoneos-arm</ReleaseEntry>
+		<ReleaseEntry key="Components">main</ReleaseEntry>
+		<ReleaseEntry key="Description">OpenRepo Repository</ReleaseEntry>
+	</Release>
+</Config>

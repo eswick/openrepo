@@ -3,7 +3,10 @@ package main;
 import (
 	"os"
 	"encoding/xml"
+	"io"
 	"io/ioutil"
+	"path"
+	"path/filepath"
 )
 
 type ReleaseEntry struct {
@@ -21,7 +24,48 @@ type Config struct {
 	Release Release;
 }
 
+func exists(path string) (bool, error) {
+	_, err := os.Stat(path);
+	if (err == nil) { return true, nil }
+	if (os.IsNotExist(err)) { return false, nil }
+	return true, err;
+}
+
+func createConfig() {
+
+	defaultConfigPath, err := filepath.Abs(filepath.Dir(os.Args[0]));
+
+	if (err != nil) { panic(err); }
+
+	in, err := os.Open(path.Join(defaultConfigPath, "config_default.xml"));
+	if (err != nil) { panic(err); }
+	defer in.Close();
+
+	out, err := os.Create("/etc/openrepo/config.xml");
+	defer out.Close();
+
+	_, err = io.Copy(out, in);
+	cerr := out.Close();
+
+	if (err != nil) { panic(err); }
+	if (cerr != nil) { panic(err); }
+}
+
 func getConfig() Config {
+	configDirExists, err := exists("/etc/openrepo");
+	if (err != nil) { panic(err); }
+
+	if (!configDirExists) {
+		os.Mkdir("/etc/openrepo", 755);
+	}
+
+	configExists, err := exists("/etc/openrepo/config.xml");
+	if (err != nil) { panic(err); }
+
+	if (!configExists) {
+		createConfig();
+	}
+
 	reader, err := os.Open("/etc/openrepo/config.xml");
 	if (err != nil) { panic(err); }
 	defer reader.Close();

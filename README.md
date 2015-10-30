@@ -4,9 +4,9 @@ OpenRepo is an APT repository server, currently targeting jailbroken iOS devices
 ## Building
     go get github.com/blakesmith/ar
     go build
-    
+
 ## Configuration
-OpenRepo's configuration is an XML file stored at `/etc/openrepo/config.xml`. Currently, this file must be made manually.
+OpenRepo's configuration is an XML file stored at `/etc/openrepo/config.xml`. An auto-generated config will be created upon running OpenRepo for the first time.
 
     mkdir /etc/oprenrepo
     touch /etc/openrepo/config.xml
@@ -27,7 +27,7 @@ Here is an example config:
     		<ReleaseEntry key="Description">OpeniOS Repository</ReleaseEntry>
     	</Release>
     </Config>
-    
+
 
 * **Config**
   * Root XML key
